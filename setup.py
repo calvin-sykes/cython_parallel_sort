@@ -25,13 +25,12 @@ setup(
     cmdclass={'build_ext': build_ext},
     description='Cython interface to GNU Parallel sorting routines',
     ext_modules=cythonize(ext, language_level=3),
-    install_requires=['Cython'],
+    install_requires=['numpy', 'pytest', 'cython'],
     long_description=long_desc,
     long_description_content_type='text/markdown',
     package_dir={'parallel_sort': 'parallel_sort'},
     packages=['parallel_sort', 'parallel_sort.tests'],
     python_requires='>=3.6',
     setup_requires=['numpy', 'cython'],
-    install_requires=['numpy', 'pytest', 'cython']
     zip_safe=False
 )
