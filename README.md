@@ -21,3 +21,9 @@ assert np.all(np.diff(x) >= 0) # x is now sorted
 
 To install, numpy and cython are required, in addition to a working installation of the GNU Parallel libraries.
 Installation has only been tested on Linux.
+
+If these requirements are met, installing via `pip` should "just work":
+
+````bash
+pip install parallel_sort
+````
