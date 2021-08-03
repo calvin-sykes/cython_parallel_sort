@@ -5,7 +5,7 @@ import numpy as np
 
 exts = [
     Extension(
-    "parallel_sort",
+        "parallel_sort",
         sources=["parallel_sort/parallel_sort.pyx"],
         define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")],
         extra_compile_args=["-fopenmp"],
@@ -20,7 +20,7 @@ with open("README.md", "r") as f:
 
 setup(
     name="parallel-sort",
-    version="0.0.1",
+    version="0.0.3",
     author="Calvin Sykes",
     author_email="sykescalvin09@gmail.com",
     url="https://github.com/calvin-sykes/cython_parallel_sort",
@@ -37,7 +37,10 @@ setup(
     long_description_content_type="text/markdown",
     package_dir={"": "parallel_sort"},
     packages=find_packages(where="parallel_sort"),
-    project_urls={"Bug Tracker": "https://github.com/calvin-sykes/cython_parallel_sort/issues"},
+    project_urls={
+        "Bug Tracker":
+        "https://github.com/calvin-sykes/cython_parallel_sort/issues"
+    },
     python_requires=">=3.6",
     setup_requires=["cython", "numpy"],
     tests_require=["pytest"],
