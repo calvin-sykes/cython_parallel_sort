@@ -1,4 +1,4 @@
-from setuptools import Extension, setup, find_packages
+from setuptools import Extension, setup
 from Cython.Build import cythonize, build_ext
 
 import numpy as np
