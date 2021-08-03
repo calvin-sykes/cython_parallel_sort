@@ -19,7 +19,7 @@ assert np.all(np.diff(x) >= 0) # x is now sorted
 
 ## Installing
 
-To install, numpy and cython are required, in addition to a working installation of the GNU Parallel libraries.
+To install, numpy and cython are required, in addition to a working installation of the GNU Parallel libraries and OpenMP.
 Installation has only been tested on Linux.
 
 If these requirements are met, installing via `pip` should "just work":
