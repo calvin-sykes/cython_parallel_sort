@@ -28,7 +28,7 @@ def test_parallel_inplace_sort_float():
 
     assert np.all(test_x == x)
 
-def test_parallel_sort_int():
+def test_parallel_inplace_sort_int():
     x = np.random.randint(int(1e6), size=1000)
     test_x = x.copy()
 
