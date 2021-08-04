@@ -9,7 +9,7 @@ exts = [
         sources=["parallel_sort/parallel_sort.pyx"],
         define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")],
         extra_compile_args=["-fopenmp"],
-        extra_link_args=["-lopenmp", "-lpthread"],
+        extra_link_args=["-lgomp", "-lpthread"],
         include_dirs=[np.get_include()],
         language="c++"
     )
