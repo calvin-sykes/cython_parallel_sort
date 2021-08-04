@@ -30,6 +30,10 @@ jobs:
         pip-wheel-args: '-w ./.wheelhouse --no-deps'
     - name: Remove linux_x86_64 build
       run: |
+        ls $PWD
+        ls .
+        ls ./.wheelhouse/
+        ls /github/workspace/.wheelhouse/*_linux_x86_64.*
         rm /github/workspace/.wheelhouse/*_linux_x86_64.*
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
