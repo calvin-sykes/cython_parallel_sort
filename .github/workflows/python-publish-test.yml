@@ -12,7 +12,7 @@ on:
    release:
      types: [prereleased]
    push:
-     branches: [ test* ]
+     branches: [test_release]
 
 jobs:
   deploy:
@@ -27,7 +27,6 @@ jobs:
         python-versions: 'cp36-cp36m'
         build-requirements: 'cython numpy'
         system-packages: 'libgomp'
-        pip-wheel-args: '-w ./.wheelhouse --no-deps'
     - name: Remove linux_x86_64 build
       run: |
         sudo find . -type f -iname "*-linux_x86_64*.whl" -delete
@@ -36,5 +35,4 @@ jobs:
       with:
         user: __token__
         password: ${{ secrets.TESTPYPI_API_KEY }}
-        packages_dir: .wheelhouse/
         repository_url: https://test.pypi.org/legacy/
