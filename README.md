@@ -1,5 +1,7 @@
 # parallel-sort
 
+[![Test build](https://github.com/calvin-sykes/cython_parallel_sort/actions/workflows/python-package.yml/badge.svg)](https://github.com/calvin-sykes/cython_parallel_sort/actions/workflows/python-package.yml)
+
 This module provides a simple Cython interface to the [GNU Parallel Mode](https://gcc.gnu.org/onlinedocs/libstdc++/manual/parallel_mode.html) sorting routines, to allow them to be used from Python code.
 
 Functions are included for in-place and out-of-place sorts, as well as indirect sorting (aka. "argsort").
