@@ -20,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v2
     - name: Build manylinux wheels
       uses: RalfG/python-wheels-manylinux-build@v0.3.4-manylinux2014_x86_64
       with:
