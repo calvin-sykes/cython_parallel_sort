@@ -9,8 +9,10 @@
 name: Publish package to TestPyPI
 
 on:
-  release:
-    types: [prereleased]
+#  release:
+#    types: [prereleased]
+   push:
+     branches: [ test* ]
 
 jobs:
   deploy:
