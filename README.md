@@ -1,6 +1,6 @@
-# parallel_sort
+# parallel-sort
 
-This module provides a simple Cython interface to the [GNU Parallel Mode](https://gcc.gnu.org/onlinedocs/libstdc++/manual/parallel_mode.html) sorting routines, to enable them to be used from Python code.
+This module provides a simple Cython interface to the [GNU Parallel Mode](https://gcc.gnu.org/onlinedocs/libstdc++/manual/parallel_mode.html) sorting routines, to allow them to be used from Python code.
 
 Functions are included for in-place and out-of-place sorts, as well as indirect sorting (aka. "argsort").
 
@@ -19,11 +19,13 @@ assert np.all(np.diff(x) >= 0) # x is now sorted
 
 ## Installing
 
-To install, numpy and cython are required, in addition to a working installation of the GNU Parallel libraries and OpenMP.
-Installation has only been tested on Linux.
+Requirements: numpy, OpenMP.
 
-If these requirements are met, installing via `pip` should "just work":
+To install from source Cython is required, in addition to a working installation of the GNU Parallel libraries.
+Installing from a wheel via `pip` should "just work":
 
 ````bash
 pip install parallel_sort
 ````
+
+Installation has only been tested on linux.
