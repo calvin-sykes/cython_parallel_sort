@@ -24,7 +24,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: '3.6'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -34,12 +34,17 @@ jobs:
     - name: Build manylinux wheels
       uses: RalfG/python-wheels-manylinux-build@v0.3.4-manylinux2014_x86_64
       with:
-        python-versions: 'cp36-cp36m'
         build-requirements: 'cython numpy'
+        pip-wheel-args: '-w ./wheelhouse --no-deps'
+        python-versions: 'cp36-cp36m'
         system-packages: 'libgomp'
-    - name: Remove linux_x86_64 build
+    - name: Remove linux_x86_64 wheels
       run: |
-        sudo find . -type f -iname "*-linux_x86_64*.whl" -delete
+        sudo find . -type f -iname "*-linux_x86_64.whl" -delete
+    - name: Copy manylinux wheels
+      run: |
+        sudo cp wheelhouse/*-manylinux2014_x86_64.whl dist/
+        ll dist/
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
       with:
