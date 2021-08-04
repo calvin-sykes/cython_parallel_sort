@@ -19,8 +19,17 @@ jobs:
 
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        include:
+          - python-version: 3.6
+            wheel-version: 'cp36-cp36m'
+          - python-version: 3.7
+            wheel-version: 'cp37-cp37m'
+          - python-version: 3.8
+            wheel-version: 'cp38-cp38'
+          - python-version: 3.9
+            wheel-version: 'cp39-cp39'
 
     steps:
     - uses: actions/checkout@v2
@@ -28,7 +37,7 @@ jobs:
       uses: RalfG/python-wheels-manylinux-build@v0.3.4-manylinux2014_x86_64
       with:
         build-requirements: 'cython numpy'
-        python-versions: 'cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39'
+        python-versions: ${{ matrix.wheel-version }}
     - name: Change ownership on distribution directory
       run: |
         sudo chown -R $(id -u):$(id -g) dist
