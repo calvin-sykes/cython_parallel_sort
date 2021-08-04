@@ -31,20 +31,18 @@ jobs:
         pip install build
     - name: Build package
       run: python -m build
+    - name: Remove linux_x86_64 wheels
+      run: |
+        sudo find . -type f -iname "*-linux_x86_64.whl" -delete
     - name: Build manylinux wheels
       uses: RalfG/python-wheels-manylinux-build@v0.3.4-manylinux2014_x86_64
       with:
         build-requirements: 'cython numpy'
-        pip-wheel-args: '-w ./wheelhouse --no-deps'
         python-versions: 'cp36-cp36m'
         system-packages: 'libgomp'
     - name: Remove linux_x86_64 wheels
       run: |
         sudo find . -type f -iname "*-linux_x86_64.whl" -delete
-    - name: Copy manylinux wheels
-      run: |
-        sudo cp wheelhouse/*-manylinux2014_x86_64.whl dist/
-        ll dist/
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
       with:
