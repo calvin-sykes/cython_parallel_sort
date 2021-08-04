@@ -26,6 +26,9 @@ jobs:
       with:
         build-requirements: 'cython numpy'
         python-versions: 'cp36-cp36m'
+    - name: Change ownership on distribution directory
+      run: |
+        sudo chown -R $(id -u):$(id -g) dist
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
