@@ -13,36 +13,36 @@ on:
     types: [released]
 
 jobs:
-  deploy:
+  bdist:
 
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - python-version: 3.6
-            wheel-version: 'cp36-cp36m'
-          - python-version: 3.7
-            wheel-version: 'cp37-cp37m'
-          - python-version: 3.8
-            wheel-version: 'cp38-cp38'
-          - python-version: 3.9
-            wheel-version: 'cp39-cp39'
-
+    
     steps:
     - uses: actions/checkout@v2
     - name: Build manylinux wheel
       uses: RalfG/python-wheels-manylinux-build@v0.3.4-manylinux2014_x86_64
       with:
         build-requirements: 'cython numpy'
-        python-versions: ${{ matrix.wheel-version }}
-    - name: Change ownership on distribution directory
+        python-versions: 'cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39'
+    - name: Remove linux_x86_64 wheels
       run: |
-        sudo chown -R $(id -u):$(id -g) dist
-    - name: Set up Python ${{ matrix.python-version }}
+        sudo find . -type f -iname "*-linux_x86_64.whl" -delete
+    - name: Publish package
+      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_API_KEY }}
+
+  sdist:
+    
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.x'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
