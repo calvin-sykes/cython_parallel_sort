@@ -26,7 +26,7 @@ with open("README.md", "r") as f:
 
 setup(
     name="parallel-sort",
-    version="0.0.3",
+    version="0.1.0",
     author="Calvin Sykes",
     author_email="sykescalvin09@gmail.com",
     url="https://github.com/calvin-sykes/cython_parallel_sort",
