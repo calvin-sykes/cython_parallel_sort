@@ -1,2 +1,2 @@
 include parallel_sort/parallel_sort.pyx
-include parallel_sort/compare.hpp
+include parallel_sort/parallel_sort.hpp
