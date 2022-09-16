@@ -5,9 +5,16 @@ import numpy as np
 
 
 # By default, use the C++ STL sort parallelised via the execution policies
-# introduced in C++17. If your gcc does not support this standard, set -std
-# accordingly below, and the libstd++ Parallel Mode sort will be used instead.
-compiler_args = ["-fopenmp", "-std=c++17"]
+# introduced in C++17. Set use_cxx17=False if your gcc does not support this
+# standard to use the libstd++ Parallel Mode implementation instead.
+use_cxx17 = True
+
+if use_cxx17:
+    compiler_args = ["-std=c++17"]
+    linker_args = ["-ltbb"]
+else:
+    compiler_args = ["-fopenmp"]
+    linker_args = ["-lgomp"]
 
 exts = [
     Extension(
@@ -15,7 +22,7 @@ exts = [
         sources=["parallel_sort/parallel_sort.pyx"],
         define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")],
         extra_compile_args=compiler_args,
-        extra_link_args=["-lgomp"],
+        extra_link_args=linker_args,
         include_dirs=[np.get_include()],
         language="c++"
     )
