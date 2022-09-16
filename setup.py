@@ -3,13 +3,19 @@ from Cython.Build import cythonize, build_ext
 
 import numpy as np
 
+
+# By default, use the C++ STL sort parallelised via the execution policies
+# introduced in C++17. If your gcc does not support this standard, set -std
+# accordingly below, and the libstd++ Parallel Mode sort will be used instead.
+compiler_args = ["-fopenmp", "-std=c++17"]
+
 exts = [
     Extension(
         "parallel_sort",
         sources=["parallel_sort/parallel_sort.pyx"],
         define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")],
-        extra_compile_args=["-fopenmp"],
-        extra_link_args=["-lgomp", "-lpthread"],
+        extra_compile_args=compiler_args,
+        extra_link_args=["-lgomp"],
         include_dirs=[np.get_include()],
         language="c++"
     )
@@ -20,7 +26,7 @@ with open("README.md", "r") as f:
 
 setup(
     name="parallel-sort",
-    version="0.0.3",
+    version="0.1.0",
     author="Calvin Sykes",
     author_email="sykescalvin09@gmail.com",
     url="https://github.com/calvin-sykes/cython_parallel_sort",
