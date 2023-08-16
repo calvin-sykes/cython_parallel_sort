@@ -4,7 +4,7 @@
 
 This module provides a simple Cython interface to parallel sorting algorithms available in C++. It provides functions for in-place and out-of-place sorts, as well as indirect sorting (aka. "argsort").
 
-By default it requires a C++17-capable compiler, and will use the parallel execution policy introduced in that standard. Alternatively, the [GNU Parallel Mode](https://gcc.gnu.org/onlinedocs/libstdc++/manual/parallel_mode.html) sorting routines can be used for older compilers without C++17 support. 
+By default it requires a C++17-capable compiler, and will use the parallel execution policy introduced in that standard. For older compilers without C++17 support, the [GNU Parallel Mode](https://gcc.gnu.org/onlinedocs/libstdc++/manual/parallel_mode.html) sorting routines may be used instead.
 
 ## Usage
 
@@ -29,7 +29,7 @@ Installing from wheel via `pip` should "just work":
 pip install parallel_sort
 ````
 
-Alternatively, the module can be built for older compilers that do not support C++17, but do supply the GNU Parallel Mode library. To build without C++17, clone the repository and change the `-std=c++17` compiler argument in `setup.py` as required. Then run:
+Alternatively, the module can be built for older compilers that do not support C++17, but do supply the GNU Parallel Mode library. To build without C++17, clone the repository and set `use_cxx17 = False` in `setup.py`. Then run:
 
 ````bash
 pip install -e .

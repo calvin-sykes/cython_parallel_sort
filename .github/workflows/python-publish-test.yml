@@ -16,9 +16,7 @@ on:
 
 jobs:
   bdist:
-
     runs-on: ubuntu-latest
-    
     steps:
     - uses: actions/checkout@v2
     - name: Build manylinux wheel
@@ -39,9 +37,7 @@ jobs:
         skip_existing: true
 
   sdist:
-    
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
