@@ -16,16 +16,15 @@ on:
 
 jobs:
   bdist:
-
     runs-on: ubuntu-latest
-    
     steps:
     - uses: actions/checkout@v2
     - name: Build manylinux wheel
-      uses: RalfG/python-wheels-manylinux-build@v0.3.4-manylinux2014_x86_64
+      uses: RalfG/python-wheels-manylinux-build@v0.7.1-manylinux_2_28_x86_64
       with:
         build-requirements: 'cython numpy'
-        python-versions: 'cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39 cp310-cp310'
+        system-packages: 'tbb-devel'
+        python-versions: 'cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39 cp310-cp310 cp311-cp311'
     - name: Remove linux_x86_64 wheels
       run: |
         sudo find . -type f -iname "*-linux_x86_64.whl" -delete
@@ -38,9 +37,7 @@ jobs:
         skip_existing: true
 
   sdist:
-    
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
