@@ -60,15 +60,15 @@ def test_parallel_argsort_int():
 
     assert np.all(test_indices == numpy_indices)
 
+
 def test_typechecking():
     x = [1, 2, 3, 4]
 
     with pytest.raises(TypeError):
         parallel_sort.sort(x)
-    
+
     with pytest.raises(TypeError):
         parallel_sort.sort_inplace(x)
-    
+
     with pytest.raises(TypeError):
         parallel_sort.argsort(x)
-
