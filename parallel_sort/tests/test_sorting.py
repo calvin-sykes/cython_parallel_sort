@@ -1,5 +1,6 @@
 import parallel_sort
 import numpy as np
+import pytest
 
 np.random.seed(1234567)
 
@@ -58,3 +59,16 @@ def test_parallel_argsort_int():
     test_indices = parallel_sort.argsort(x)
 
     assert np.all(test_indices == numpy_indices)
+
+def test_typechecking():
+    x = [1, 2, 3, 4]
+
+    with pytest.raises(TypeError):
+        parallel_sort.sort(x)
+    
+    with pytest.raises(TypeError):
+        parallel_sort.sort_inplace(x)
+    
+    with pytest.raises(TypeError):
+        parallel_sort.argsort(x)
+

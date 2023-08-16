@@ -2,11 +2,7 @@
 # cython: wraparound = False
 
 import numpy as np
-cimport numpy as np
-import cython
 cimport cython 
-
-from libcpp cimport bool
 
 ctypedef fused real:
     cython.char
@@ -29,22 +25,32 @@ cdef extern from "parallel_sort.hpp":
         operator()(cython.long i1, cython.long i2) nogil
 
     cdef void __sort[T](T first, T last)
-    cdef void __sort[T, Compare](T first, T last, Compare c) 
+    cdef void __sort[T, Compare](T first, T last, Compare c)
 
-cpdef sort_inplace(real[:] a):
+def check_ndarray(func):
+    def wrapped(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except TypeError as e:
+            raise TypeError("Only NumPy arrays of arithmetic types may be sorted") from e
+    return wrapped
+
+@check_ndarray
+def sort_inplace(real[:] a):
     """In-place parallel sort for numpy types"""
     __sort(&a[0], &a[a.shape[0]])
 
-cpdef sort(real[:] a):
+@check_ndarray
+def sort(real[:] a):
     """Parallel sort for numpy types"""
     cdef real[:] a_copy = np.copy(a)
     __sort(&a_copy[0], &a_copy[a_copy.shape[0]])
     return np.array(a_copy)
 
-cpdef argsort(real[:] a):
+@check_ndarray
+def argsort(real[:] a):
     """Parallel indirect sort for numpy types"""
     cdef long[:] indices = np.arange(a.shape[0], dtype=long)
     cdef IndexCompare[real] compare = IndexCompare[real](&a[0])
-    
     __sort(&indices[0], &indices[indices.shape[0]], compare)
     return np.array(indices)
