@@ -5,10 +5,10 @@ name: Python package
 
 on:
   push:
-    branches: [ test_release ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
-  workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   build-py36: # Must use old Ubuntu version for Python 3.6
