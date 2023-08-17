@@ -38,3 +38,11 @@ pip install -e .
 to compile and install the module.
 
 Installation has been tested on linux (Ubuntu, CentOS) and Mac (via Homebrew).
+
+### Note for Apple Silicon Macs
+
+If the module builds OK, but importing it fails with an error "undefined reference to `aarch64_ldadd4_acq_rel`", try rebuilding with the following command (substituting your gcc version as appropriate):
+
+````bash
+CFLAGS=-mno-outline-atomics CC=$(brew --prefix gcc)/bin/gcc-13 pip install --no-cache-dir -e .
+````
