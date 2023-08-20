@@ -61,31 +61,9 @@ else:
     exts = [extension]
     cmdclass_kw = {}
 
-with open("README.md", "r") as f:
-    long_desc = f.read()
-
 setup(
-    name="parallel-sort",
-    version="0.1.2",
-    author="Calvin Sykes",
-    author_email="sykescalvin09@gmail.com",
-    url="https://github.com/calvin-sykes/cython_parallel_sort",
-    classifiers=[
-        "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: POSIX :: Linux"
-    ],
     cmdclass=cmdclass_kw,
-    description="Cython interface to parallel sorting routines",
     ext_modules=exts,
-    install_requires=["numpy"],
-    long_description=long_desc,
-    long_description_content_type="text/markdown",
     package_dir={"": "parallel_sort"},
     packages=find_packages(where="parallel_sort"),
-    project_urls={
-        "Bug Tracker":
-        "https://github.com/calvin-sykes/cython_parallel_sort/issues"
-    },
-    python_requires=">=3.6",
 )

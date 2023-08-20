@@ -155,5 +155,4 @@ def test_cpu_usage():
     cpu_numpy = psutil.cpu_percent(None)
     parallel_sort.sort_inplace(x)
     cpu_test = (psutil.cpu_percent(None))
-    print(cpu_numpy, cpu_test)
     assert cpu_test > cpu_numpy
