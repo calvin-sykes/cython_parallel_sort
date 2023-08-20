@@ -6,6 +6,7 @@ import parallel_sort
 
 np.random.seed(1234567)
 
+
 def test_parallel_sort_int():
     x = np.random.randint(int(1e6), size=1000)
 
@@ -113,6 +114,7 @@ def test_parallel_argsort_float():
     test_indices = parallel_sort.argsort(x)
 
     assert_argsort(x, numpy_indices, test_indices)
+
 
 def test_parallel_argsort_float16():
     x = np.random.random(size=1000).astype(np.float16)
