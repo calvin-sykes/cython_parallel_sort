@@ -28,7 +28,7 @@ jobs:
     - name: Test with pytest
       run: |
         tox run -e tests
-	tox run -e tests_with_cython
+        tox run -e tests_with_cython
 
   build:
     runs-on: ubuntu-latest
