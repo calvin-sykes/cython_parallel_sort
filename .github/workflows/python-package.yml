@@ -23,8 +23,8 @@ jobs:
       run: |
         sudo apt-get -y install libtbb-dev
         python -m pip install --upgrade pip
-        python -m pip install tox Cython
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        python -m pip install tox
+        if [ -f requirements_dev.txt ]; then pip install -r requirements_dev.txt; fi
     - name: Lint with flake8
       run: |
         tox run -e lint
@@ -49,8 +49,8 @@ jobs:
       run: |
         sudo apt-get -y install libtbb-dev
         python -m pip install --upgrade pip
-        python -m pip install tox Cython
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        python -m pip install tox
+        if [ -f requirements_dev.txt ]; then pip install -r requirements_dev.txt; fi
     - name: Lint with flake8
       run: |
         tox run -e lint
