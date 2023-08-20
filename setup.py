@@ -9,6 +9,7 @@ try:
 except ImportError:
     USE_CYTHON = False
 
+
 def pkgconfig(package, kw):
     """Get library and include paths from pkg-config, and append to existing args dict"""
     flag_map = {'-I': 'include_dirs', '-L': 'library_dirs', '-l': 'libraries'}
@@ -21,6 +22,7 @@ def pkgconfig(package, kw):
     for token in output.strip().split():
         kw.setdefault(flag_map.get(token[:2]), []).append(token[2:])
     return kw
+
 
 # By default, use the C++ STL sort parallelised via the execution policies
 # introduced in C++17. Set use_cxx17=False if your gcc does not support this
@@ -64,7 +66,7 @@ with open("README.md", "r") as f:
 
 setup(
     name="parallel-sort",
-    version="0.1.1",
+    version="0.1.2",
     author="Calvin Sykes",
     author_email="sykescalvin09@gmail.com",
     url="https://github.com/calvin-sykes/cython_parallel_sort",
@@ -86,7 +88,4 @@ setup(
         "https://github.com/calvin-sykes/cython_parallel_sort/issues"
     },
     python_requires=">=3.6",
-    setup_requires=["Cython", "numpy"],
-    tests_require=["pytest", "psutil"],
-    zip_safe=False
 )
