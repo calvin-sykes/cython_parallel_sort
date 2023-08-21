@@ -8,6 +8,10 @@ try:
     USE_CYTHON = True
 except ImportError:
     USE_CYTHON = False
+print(USE_CYTHON)
+
+with open("VERSION", "r") as f:
+    version, = f.readlines()
 
 
 def pkgconfig(package, kw):
@@ -62,6 +66,8 @@ else:
     cmdclass_kw = {}
 
 setup(
+    name="parallel-sort",
+    version=version,
     cmdclass=cmdclass_kw,
     ext_modules=exts,
     package_dir={"": "parallel_sort"},
