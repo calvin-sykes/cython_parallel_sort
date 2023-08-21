@@ -8,10 +8,6 @@ try:
     USE_CYTHON = True
 except ImportError:
     USE_CYTHON = False
-print(USE_CYTHON)
-
-with open("VERSION", "r") as f:
-    version, = f.readlines()
 
 
 def pkgconfig(package, kw):
@@ -20,12 +16,9 @@ def pkgconfig(package, kw):
     code, output = subprocess.getstatusoutput(
         'pkg-config --cflags --libs {}'.format(package))
     if code > 0:
-        print(f"pkgconfig failed to find the {package} library.")
-        print("Please ensure it is installed and accessible, or set use_cxx17=False in setup.py")
-        exit(1)
+        raise ValueError
     for token in output.strip().split():
         kw.setdefault(flag_map.get(token[:2]), []).append(token[2:])
-    return kw
 
 
 # By default, use the C++ STL sort parallelised via the execution policies
@@ -44,9 +37,24 @@ extension_kwargs = {
     "libraries": ["npymath"]
 }
 
+
+def get_tbb_directories(extension_kwargs):
+    packages_to_try = ["tbb", "tbb-devel"]
+    for package in packages_to_try:
+        try:
+            pkgconfig(package, extension_kwargs)
+            found = True
+        except ValueError:
+            pass
+    if not found:
+        print(f"pkgconfig failed to find the {package} library.")
+        print("Please ensure it is installed and accessible, or set use_cxx17=False in setup.py")
+        exit(1)
+
+
 if use_cxx17:
     extension_kwargs["extra_compile_args"] = ["-std=c++17"]
-    extension_kwargs = pkgconfig("tbb", extension_kwargs)
+    get_tbb_directories(extension_kwargs)
 else:
     extension_kwargs["extra_compile_args"] = ["-fopenmp", "-D_GLIBCXX_PARALLEL"]
     extension_kwargs["extra_link_args"] = ["-lgomp"]
@@ -66,8 +74,6 @@ else:
     cmdclass_kw = {}
 
 setup(
-    name="parallel-sort",
-    version=version,
     cmdclass=cmdclass_kw,
     ext_modules=exts,
     package_dir={"": "parallel_sort"},

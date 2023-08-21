@@ -4,6 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "parallel-sort"
+version = "0.1.2"
 authors = [
     {name = "Calvin Sykes", email = "sykescalvin09@gmail.com"}
 ]
@@ -14,13 +15,9 @@ classifiers = [
 ]
 dependencies = ["numpy"]
 description="Cython interface to parallel sorting routines"
-dynamic = ["version"]
 license = {file = "LICENSE"}
 readme = {file = "README.md", content-type = "text/markdown"}
 requires-python = ">=3.6"
 
 [project.urls]
 Repository = "https://github.com/calvin-sykes/cython_parallel_sort.git"
-
-[tool.setuptools.dynamic]
-version = {file = "VERSION"}
