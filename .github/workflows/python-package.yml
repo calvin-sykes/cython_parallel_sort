@@ -11,26 +11,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-py36: # Must use old Ubuntu version for Python 3.6
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.6
-      uses: actions/setup-python@v2
-      with:
-        python-version: "3.6"
-    - name: Install dependencies
-      run: |
-        sudo apt-get -y install libtbb-dev
-        python -m pip install --upgrade pip
-        python -m pip install tox
-    - name: Lint with flake8
-      run: |
-        tox run -e lint
-    - name: Test with pytest
-      run: |
-        tox run -e tests
-
   build:
     runs-on: ubuntu-latest
     strategy:

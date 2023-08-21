@@ -47,9 +47,8 @@ def get_tbb_directories(extension_kwargs):
         except ValueError:
             pass
     if not found:
-        print(f"pkgconfig failed to find the {package} library.")
-        print("Please ensure it is installed and accessible, or set use_cxx17=False in setup.py")
-        exit(1)
+        raise FileNotFoundError(
+            "pkgconfig failed to find the tbb library. Please ensure it is installed and accessible, or set use_cxx17=False in setup.py.")
 
 
 if use_cxx17:
