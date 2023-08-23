@@ -4,7 +4,10 @@
 #include <algorithm>
 #if __cplusplus >= 201703L 
 #include <execution>
-#endif 
+static_assert(__cpp_lib_execution);
+#endif
+
+#include "numpy/halffloat.h"
 
 template<typename T>
 class IndexCompare {
@@ -12,16 +15,29 @@ public:
   T* _a;
   IndexCompare() = default;
   IndexCompare(T* a);
-  
   bool operator()(long i1, long i2);
 };
 
 template <typename T>
-IndexCompare<T>::IndexCompare(T* a): _a(a) {};
+IndexCompare<T>::IndexCompare(T* a): _a(a) {}
 
 template <typename T>
 bool IndexCompare<T>::operator()(long i1, long i2) {
-    return _a[i1] < _a[i2];
+  return _a[i1] < _a[i2];
+}
+
+class IndexCompareF16 {
+public:
+  npy_half* _a;
+  IndexCompareF16() = default;
+  IndexCompareF16(npy_half* a);
+  bool operator()(long i1, long i2);
+};
+
+IndexCompareF16::IndexCompareF16(npy_half* a): _a(a) {}
+
+bool IndexCompareF16::operator()(long i1, long i2) {
+  return npy_half_lt(_a[i1], _a[i2]);
 }
 
 #if __cplusplus >= 201703L
