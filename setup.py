@@ -31,7 +31,7 @@ np_lib_path = abspath(join(np_include_path, "..", "lib"))
 file_ext = "pyx" if USE_CYTHON else "cpp"
 
 extension_kwargs = {
-    "sources": [f"parallel_sort/parallel_sort.{file_ext}"],
+    "sources": [f"parallel_sort/src/parallel_sort.{file_ext}"],
     "include_dirs": [np_include_path],
     "library_dirs": [np_lib_path],
     "libraries": ["npymath"]
@@ -58,7 +58,7 @@ else:
     extension_kwargs["extra_link_args"] = ["-lgomp"]
 
 extension = Extension(
-    "parallel_sort",
+    "parallel_sort.extension",
     define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")],
     language="c++",
     **extension_kwargs
@@ -74,6 +74,5 @@ else:
 setup(
     cmdclass=cmdclass_kw,
     ext_modules=exts,
-    package_dir={"": "parallel_sort"},
-    packages=find_packages(where="parallel_sort")
+    packages=find_packages()
 )

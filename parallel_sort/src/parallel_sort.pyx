@@ -6,13 +6,6 @@ import numpy as np
 cimport numpy as cnp
 cimport cython
 
-try:
-    from _version import version as __version__
-    from _version import version_tuple
-except ImportError as e:
-    __version__ = "unknown"
-    version_tuple = (0, 0, "unknown")
-
 ctypedef fused real:
     cython.char
     cython.uchar
