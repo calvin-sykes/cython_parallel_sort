@@ -7,6 +7,10 @@ import parallel_sort
 np.random.seed(1234567)
 
 
+def test_version():
+    assert parallel_sort.__version__ != "unknown"
+
+
 def test_parallel_sort_int():
     x = np.random.randint(int(1e6), size=1000)
 

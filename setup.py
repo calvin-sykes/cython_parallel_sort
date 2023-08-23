@@ -47,8 +47,7 @@ def get_tbb_directories(extension_kwargs):
         except ValueError:
             pass
     if not found:
-        raise FileNotFoundError(
-            "pkgconfig failed to find the tbb library. Please ensure it is installed and accessible, or set use_cxx17=False in setup.py.")
+        raise FileNotFoundError("pkgconfig failed to find the tbb library. Please ensure it is installed and accessible, or set use_cxx17=False in setup.py.")  # noqa: E501
 
 
 if use_cxx17:
@@ -76,5 +75,5 @@ setup(
     cmdclass=cmdclass_kw,
     ext_modules=exts,
     package_dir={"": "parallel_sort"},
-    packages=find_packages(where="parallel_sort"),
+    packages=find_packages(where="parallel_sort")
 )
