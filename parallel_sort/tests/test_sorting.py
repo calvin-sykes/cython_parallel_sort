@@ -8,8 +8,6 @@ np.random.seed(1234567)
 
 
 def test_version():
-    import sys
-    sys.stdout.write(parallel_sort.__version__)
     assert parallel_sort.__version__ != "unknown"
 
 

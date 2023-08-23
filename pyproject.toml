@@ -24,3 +24,6 @@ Repository = "https://github.com/calvin-sykes/cython_parallel_sort.git"
 
 [tool.setuptools_scm]
 write_to = "parallel_sort/_version.py"
+
+[tool.pytest.ini_options]
+addopts = ["--import-mode=importlib"]
