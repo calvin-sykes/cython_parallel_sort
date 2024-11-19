@@ -31,7 +31,7 @@ On Linux, installing from wheel via `pip` should "just work":
 pip install parallel_sort
 ````
 
-On Mac, it is important to ensure that gcc is used to compile the module rather than the default Apple-provided clang, which can be done by prefixing the install command with `CC=$(brew --prefix gcc)/bin/gcc-13` (substituting your gcc version as appropriate).
+On Mac, it is important to ensure that gcc is used to compile the module rather than the default Apple-provided clang, which can be done by prefixing the install command with `CC=$(brew --prefix gcc)/bin/g++-13` (substituting your gcc version as appropriate).
 
 ### GNU Parallel Mode option
 
@@ -48,5 +48,5 @@ to compile and install the module.
 If the module builds OK, but importing it fails with an error "undefined reference to `aarch64_ldadd4_acq_rel`", try rebuilding with the following command
 
 ````bash
-CFLAGS=-mno-outline-atomics CC=$(brew --prefix gcc)/bin/gcc-13 pip install --no-cache-dir -e .
+CFLAGS=-mno-outline-atomics CC=$(brew --prefix gcc)/bin/g++-13 pip install --no-cache-dir -e .
 ````
