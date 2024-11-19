@@ -40,6 +40,7 @@ extension_kwargs = {
 
 def get_tbb_directories(extension_kwargs):
     packages_to_try = ["tbb", "tbb-devel"]
+    found = False
     for package in packages_to_try:
         try:
             pkgconfig(package, extension_kwargs)
