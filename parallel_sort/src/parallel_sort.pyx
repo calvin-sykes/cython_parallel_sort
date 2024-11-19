@@ -4,6 +4,7 @@
 
 import numpy as np
 cimport numpy as cnp
+cnp.import_array()
 cimport cython
 
 ctypedef fused real:
