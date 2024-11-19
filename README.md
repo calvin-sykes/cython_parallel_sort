@@ -25,13 +25,19 @@ Note that these routines are "unstable" sorts, meaning that the ordering of equa
 
 Requirements: numpy, C++17-capable g++, Cython (only for installation from source).
 
-On Linux, installing from wheel via `pip` should "just work":
+### Linux
+
+Installing from wheel via `pip` should "just work":
 
 ````bash
 pip install parallel_sort
 ````
 
-On Mac, it is important to ensure that gcc is used to compile the module rather than the default Apple-provided clang, which can be done by prefixing the install command with `CC=$(brew --prefix gcc)/bin/g++-13` (substituting your gcc version as appropriate).
+To install from source, Intel TBB must first be installed via your distribution's package manager.
+
+### Mac
+
+Wheels are not available. To install from source, Homebrew and Intel TBB (`brew install tbb`) are required. The module must be compiled using Homebrew's gcc, which can be done by prefixing the install command with `CXX=$(brew --prefix gcc)/bin/g++-14` (substituting your gcc version as appropriate).
 
 ### GNU Parallel Mode option
 
@@ -48,5 +54,5 @@ to compile and install the module.
 If the module builds OK, but importing it fails with an error "undefined reference to `aarch64_ldadd4_acq_rel`", try rebuilding with the following command
 
 ````bash
-CFLAGS=-mno-outline-atomics CC=$(brew --prefix gcc)/bin/g++-13 pip install --no-cache-dir -e .
+CFLAGS=-mno-outline-atomics CXX=$(brew --prefix gcc)/bin/g++-14 pip install --no-cache-dir -e .
 ````
